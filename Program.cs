@@ -10,7 +10,7 @@ namespace Quest
     {
         static async Task Main(string[] args)
         {
-            // Our adventurer is currently named "Jack". Studies show that "Jack" is probably not the application user's name. Update the code to prompt the user for their name and pass that name to the Adventurer constructor when creating the new Adventurer object.
+            // prompt the user for their name and pass that name to the Adventurer constructor when creating the new Adventurer object.
             Console.WriteLine(@"
                                   ....
                                 .'' .'''
@@ -123,25 +123,49 @@ namespace Quest
                 favoriteBeatle
             };
 
-            // Loop through all the challenges and subject the Adventurer to them
-            foreach (Challenge challenge in challenges)
+            // While user wants to play loop game
+            bool keepPlaying = true;
+            while (keepPlaying == true)
             {
-                challenge.RunChallenge(theAdventurer);
-            }
+                // Loop through all the challenges and subject the Adventurer to them
+                foreach (Challenge challenge in challenges)
+                {
+                    challenge.RunChallenge(theAdventurer);
+                }
 
-            // This code examines how Awesome the Adventurer is after completing the challenges
-            // And praises or humiliates them accordingly
-            if (theAdventurer.Awesomeness >= maxAwesomeness)
-            {
-                Console.WriteLine("YOU DID IT! You are truly awesome!");
-            }
-            else if (theAdventurer.Awesomeness <= minAwesomeness)
-            {
-                Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
-            }
-            else
-            {
-                Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                // This code examines how Awesome the Adventurer is after completing the challenges
+                // And praises or humiliates them accordingly
+                if (theAdventurer.Awesomeness >= maxAwesomeness)
+                {
+                    Console.WriteLine("YOU DID IT! You are truly awesome!");
+                }
+                else if (theAdventurer.Awesomeness <= minAwesomeness)
+                {
+                    Console.WriteLine("Get out of my sight. Your lack of awesomeness offends me!");
+                }
+                else
+                {
+                    Console.WriteLine("I guess you did...ok? ...sorta. Still, you should get out of my sight.");
+                }
+                
+                
+                Console.Write("Play Again? (Y/N): ");
+                string answer = Console.ReadLine().ToLower();
+
+                while (answer != "y" && answer != "n")
+                {
+                    Console.Write("Play Again? (Y/N): ");
+                    answer = Console.ReadLine().ToLower();
+                }
+
+                if (answer == "y")
+                {
+                    keepPlaying = true;
+                }
+                else
+                {
+                    keepPlaying = false;
+                }        
             }
         }
     }
